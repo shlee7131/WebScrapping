@@ -121,7 +121,7 @@ HTML구조에서 특정 부분의 위치를 빠르게 찾을 수 있도록 도�
 - 변환된 BS4 객체를 통해 HTML의 Element로 접근
 - get_text() : text 가져오기
 - HTML 구조상 형제 관계
-  - next_sibiling(),next_siblings(), find_next_sibling('key'), find_next_sibilings('key')
+  - next_sibiling(),next_siblings(), find_next_sibling('key'), find_next_sibilings('key') ... ,(previous 도 있다)
 - HTML 구조상 부모 관계
 
   - parent()
