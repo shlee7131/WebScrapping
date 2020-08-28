@@ -53,45 +53,45 @@ HTML구조에서 특정 부분의 위치를 빠르게 찾을 수 있도록 도�
 - ^ (^de) : 문자열의 시작 -> desk, destination (0) | fade (X)
 - $ (se$) : 문자열의 끝 -> case, base (0) | face (X)
 
-        #정규식 표현
-        import re
+  #정규식 표현
+  import re
 
-        # ca?e 로 표현된 문자를 찾아내기
+  #ca?e 로 표현된 문자를 찾아내기
 
-        p = re.compile("ca.e") # p = re.compile("원하는 형태")
+  p = re.compile("ca.e") # p = re.compile("원하는 형태")
 
-        # . (ca.e): 하나의 문자 -> care, cafe, case (O) | caffe(X)
+  #. (ca.e): 하나의 문자 -> care, cafe, case (O) | caffe(X)
 
-        # ^ (^de) : 문자열의 시작 -> desk, destination (0) | fade (X)
+  #^ (^de) : 문자열의 시작 -> desk, destination (0) | fade (X)
 
-        # $ (se$) : 문자열의 끝 -> case, base (0) | face (X)
+  #$ (se$) : 문자열의 끝 -> case, base (0) | face (X)
 
-        m = p.match("case") # 비교하려는 값 전달
-        print(m.group()) # 매치되지 않으면 에러가 발생
+  m = p.match("case") # 비교하려는 값 전달
+  print(m.group()) # 매치되지 않으면 에러가 발생
 
-        def print_match(m):
-        if m:
-        print("m.group():" , m.group()) # 표현식과 일치하는 문자열 반환
-        print("m.string:" ,m.string) # 입력받은 문자열
-        print("m.start():", m.start()) # 일치하는 문자열의 시작 index
-        print("m.end():", m.end()) # 일치하는 문자열의 끝 index
-        print("m.span():", m.span()) # 일치하는 문자열의 시작과 끝 index
-        else:
-        print("매칭되지 않음")
+  def print_match(m):
+  if m:
+  print("m.group():" , m.group()) # 표현식과 일치하는 문자열 반환
+  print("m.string:" ,m.string) # 입력받은 문자열
+  print("m.start():", m.start()) # 일치하는 문자열의 시작 index
+  print("m.end():", m.end()) # 일치하는 문자열의 끝 index
+  print("m.span():", m.span()) # 일치하는 문자열의 시작과 끝 index
+  else:
+  print("매칭되지 않음")
 
-        m = p.match("coffe")
-        print_match(m) # 매칭되지 않음
+  m = p.match("coffe")
+  print_match(m) # 매칭되지 않음
 
-        m = p.match("careless") # match : 주어진 문자열의 처음부터 일치하는지 확인
-        print_match(m) # careless가 아닌 care 만 출력
+  m = p.match("careless") # match : 주어진 문자열의 처음부터 일치하는지 확인
+  print_match(m) # careless가 아닌 care 만 출력
 
-        m = p.search("good care") # search : 주어진 문자열 중에 일치하는게 있는지 확인
-        print_match(m)
+  m = p.search("good care") # search : 주어진 문자열 중에 일치하는게 있는지 확인
+  print_match(m)
 
-        lst = p.findall("careless") # findall : 일치하는 모든 것을 리스트 형태로 반환
-        print(lst)
-        lst = p.findall("good care cafe")
-        print(lst)
+  lst = p.findall("careless") # findall : 일치하는 모든 것을 리스트 형태로 반환
+  print(lst)
+  lst = p.findall("good care cafe")
+  print(lst)
 
 ## User Agent
 
@@ -126,59 +126,59 @@ HTML구조에서 특정 부분의 위치를 빠르게 찾을 수 있도록 도�
 
   - parent()
 
-            import requests
-            from bs4 import BeautifulSoup
+    import requests
+    from bs4 import BeautifulSoup
 
-            url = "https://comic.naver.com/webtoon/weekday.nhn"
-            res = requests.get(url)
-            res.raise_for_status()
+    url = "https://comic.naver.com/webtoon/weekday.nhn"
+    res = requests.get(url)
+    res.raise_for_status()
 
-            # requests를 통해 가져온 html 문서를 lxml 파서를 통해 BS 객체로 변환
+    #requests를 통해 가져온 html 문서를 lxml 파서를 통해 BS 객체로 변환
 
-            soup = BeautifulSoup(res.text, 'lxml')
+    soup = BeautifulSoup(res.text, 'lxml')
 
-            # 만들어진 soup을 통해 html의 element에 접근할 수 있다
+    #만들어진 soup을 통해 html의 element에 접근할 수 있다
 
-            #print(soup.title)
-            #print(soup.title.get_text())
-            print(soup.a) # 첫번쨰로 발견되는 a element 정보가 출력
-            print(soup.a.attrs, end='\n\n') # dict 형태로 a의 속성들만 출력
-            print(soup.a['href']) # a 속성 dict 중 key값이 'href'인 value 출력
+    #print(soup.title)
+    #print(soup.title.get_text())
+    print(soup.a) # 첫번쨰로 발견되는 a element 정보가 출력
+    print(soup.a.attrs, end='\n\n') # dict 형태로 a의 속성들만 출력
+    print(soup.a['href']) # a 속성 dict 중 key값이 'href'인 value 출력
 
-            # 태그가 a 에서 class = Nbtn_upload 인 element 출력
+    #태그가 a 에서 class = Nbtn_upload 인 element 출력
 
-            find = soup.find('a', attrs={'class':'Nbtn_upload'})
-            print(find, end='\n\n')
+    find = soup.find('a', attrs={'class':'Nbtn_upload'})
+    print(find, end='\n\n')
 
-            rank1 = soup.find("li",attrs={'class':'rank01'})
-            print(rank1.a) # soup을 통해서 발견한 rank1 객체에서 a element 정보만 출력
-            print(rank1.a.get_text())
+    rank1 = soup.find("li",attrs={'class':'rank01'})
+    print(rank1.a) # soup을 통해서 발견한 rank1 객체에서 a element 정보만 출력
+    print(rank1.a.get_text())
 
-            #html 구조상 형제 관게
-            rank2 = rank1.next_sibling.next_sibling
-            rank3 = rank2.next_sibling.next_sibling
+    #html 구조상 형제 관게
+    rank2 = rank1.next_sibling.next_sibling
+    rank3 = rank2.next_sibling.next_sibling
 
-            print('rank2:',rank2.a.get_text())
-            print('rank3:',rank3.a.get_text())
+    print('rank2:',rank2.a.get_text())
+    print('rank3:',rank3.a.get_text())
 
-            rank2 = rank3.previous_sibling.previous_sibling
-            print('rank2:',rank2.a.get_text())
+    rank2 = rank3.previous_sibling.previous_sibling
+    print('rank2:',rank2.a.get_text())
 
-            #HTML 구조에서 부모관계
-            print(rank1.parent)
+    #HTML 구조에서 부모관계
+    print(rank1.parent)
 
-            rank2 = rank1.find_next_sibling('li') # li 태그를 가진 다음 형제 찾기
-            rank2 = rank3.find_previous_sibling('li')
-            print('rank2:', rank2.a.get_text())
-            print('rank3:',rank3.a.get_text())
+    rank2 = rank1.find_next_sibling('li') # li 태그를 가진 다음 형제 찾기
+    rank2 = rank3.find_previous_sibling('li')
+    print('rank2:', rank2.a.get_text())
+    print('rank3:',rank3.a.get_text())
 
-            # 이어지는 모든 형제의 값 찾기
+    #이어지는 모든 형제의 값 찾기
 
-            print(rank1.find_next_siblings('li'))
+    print(rank1.find_next_siblings('li'))
 
-            #text 기반 찾기 -> a element 중 text = '고수-2부 111화'
-            webtoon = soup.find('a', text = '고수-2부 111화')
-            print(webtoon)
+    #text 기반 찾기 -> a element 중 text = '고수-2부 111화'
+    webtoon = soup.find('a', text = '고수-2부 111화')
+    print(webtoon)
 
 ### 활용
 
@@ -194,7 +194,7 @@ HTML구조에서 특정 부분의 위치를 빠르게 찾을 수 있도록 도�
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36'}
 
-# 1~5 페이지 정보 가져오기
+#1~5 페이지 정보 가져오기
 
 for i in range(1, 6):
 
@@ -260,3 +260,45 @@ for i in range(1, 6):
             print(f"가격 : {price}")
             print(f"제품명 : {rate}점 {rate_cnt} 개")
             print('바로가기: {}'.format('https://www.coupang.com' + link))
+
+### 엑셀 만들기
+
+- import csv
+- 파일 만들기 -> 확장자 csv -> csv.writer()
+- writerow(list 구조)-> 행 변환
+
+  import csv
+  import requests
+  from bs4 import BeautifulSoup
+
+  #페이지 유동적
+  url = 'https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&page='
+
+  filename = '시가총액1-200.csv' #엑셀에서 한글파일 깨질때 utf-8-sig 변환
+  f = open(filename, 'w', encoding = 'utf-8-sig', newline = '')
+  writer = csv.writer(f) # csv
+
+  title = "N 종목명 현재가 전일비 등락률 액면가 시가총액 상장주식수 외국인비율 거래량 PER ROE".split('\t') #['N','종목명','현재가', ..]
+  print(type(title))
+  writer.writerow(title)
+
+  for page in range(1, 5):
+  res = requests.get(url + str(page)) #페이지 변환
+  res.raise_for_status()
+
+        soup = BeautifulSoup(res.text, 'lxml')
+
+        # table 태그에서 class 명인 type_2인 표의 tbody 에서 정보를 가져온다
+        data_rows = soup.find('table', attrs={'class':'type_2'}).find('tbody').find_all('tr')
+
+        for row in data_rows:
+            columns = row.find_all('td')
+            if len(columns) <= 1: # 의미 없는 데이터는 skip
+                continue
+
+            #strip()을 활용하여 불필요한 공백 제거
+            data = [column.get_text().strip() for column in columns]
+            #list 구조를 행으로 변환
+            writer.writerow(data)
+
+## Selenium
